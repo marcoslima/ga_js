@@ -1,5 +1,5 @@
 // var assert = require("assert");
-// var salesman = require("./salesman.js");
+// var salesman = require("./index.js");
 //
 // var tests = [
 //     {q:[[0,0]], r:[0]},
@@ -12,5 +12,8 @@
 //     var res = salesman.solve(points);
 //     assert.deepEqual(test.r, res);
 // }
-const salesman = require("./salesman");
+const salesman = require("./index");
 
+test('Nada', () => {
+  expect(true).toBe(true);
+})

@@ -94,7 +94,7 @@ class Path {
  * // ordered_points now contains the points, in the order they ought to be visited.
  **/
 function solve(points, temp_coeff, callback) {
-  const path = new exports.Path(points);
+  const path = new Path(points);
   if (points.length < 2) return path.order; // There is nothing to optimize
   if (!temp_coeff)
     temp_coeff = 1 - Math.exp(-10 - Math.min(points.length,1e6)/1e5);
@@ -134,34 +134,34 @@ if (typeof module === "object") {
 
 
 ////////////////////////////////////////////////////////
-describe("Salesman's internal tests", () =>
-{
-  test('Point is a point', () => {
-      const point = new Point(42, 17);
-      expect(point.x).toBe(42);
-      expect(point.y).toBe(17);
-  })
-
-  test('Distance', () => {
-      const p1 = new Point(0, 0);
-      const p2 = new Point(1, 1);
-      const p3 = new Point(1, 0);
-
-      expect(distance(p1, p2)).toBe(Math.sqrt(2));
-      expect(distance(p1, p3)).toBe(1);
-      expect(distance(p2, p3)).toBe(1);
-  })
-
-  describe('Path method tests', () => {
-    test('swap', () => {
-      const path = new Path([]);
-      path.order = [42, 17];
-      expect(path.order[0]).toBe(42);
-      expect(path.order[1]).toBe(17);
-      path.swap(0, 1);
-      expect(path.order[0]).toBe(17);
-      expect(path.order[1]).toBe(42);
-
-    })
-  })
-})
+// describe("Salesman's internal tests", () =>
+// {
+//   test('Point is a point', () => {
+//       const point = new Point(42, 17);
+//       expect(point.x).toBe(42);
+//       expect(point.y).toBe(17);
+//   })
+//
+//   test('Distance', () => {
+//       const p1 = new Point(0, 0);
+//       const p2 = new Point(1, 1);
+//       const p3 = new Point(1, 0);
+//
+//       expect(distance(p1, p2)).toBe(Math.sqrt(2));
+//       expect(distance(p1, p3)).toBe(1);
+//       expect(distance(p2, p3)).toBe(1);
+//   })
+//
+//   describe('Path method tests', () => {
+//     test('swap', () => {
+//       const path = new Path([]);
+//       path.order = [42, 17];
+//       expect(path.order[0]).toBe(42);
+//       expect(path.order[1]).toBe(17);
+//       path.swap(0, 1);
+//       expect(path.order[0]).toBe(17);
+//       expect(path.order[1]).toBe(42);
+//
+//     })
+//   })
+// })

@@ -77,6 +77,17 @@ test('Calc Fitness', () => {
 });
 
 
+test('Calc Fitness retorna 1e20 se index error', () => {
+  const mock_cities = make_mock_cities();
+  const genes = '00000000000000010000001000000011';
+  const routes = ga_tsp.decode_genes(genes, 4);
+  expect(routes).toEqual([0, 1, 2, 3]);
+  const fitness = ga_tsp.calc_fitness(mock_cities, genes, 4, calc_route_distance);
+
+  expect(fitness).toBe(1e20 + 20);
+});
+
+
 test('Calc Fitinesses', () => {
   jest.spyOn(ga_tsp, 'calc_fitness');
   ga_tsp.calc_fitness.mockImplementationOnce((cities, genes, N, fn_calc_dist) => 1);
