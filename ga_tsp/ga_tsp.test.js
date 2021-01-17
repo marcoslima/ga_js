@@ -106,3 +106,63 @@ test('Calc Fitinesses', () => {
   expect(result).toEqual([1, 2, 3]);
 
 });
+
+test('Ordenação da população de acordo com fitness', () => {
+  const mock_population = [1, 2, 3, 4, 5];
+  const mock_fitnesses = [5, 4, 3, 2, 1];
+
+  const result = ga_tsp.order_pop(mock_population, mock_fitnesses);
+
+  expect(result).toEqual([5, 4, 3, 2, 1]);
+})
+
+test('Make Roleta faz array com os elementos ordenados', () =>{
+  const mock_N = 6;
+  const result = ga_tsp.make_roleta(mock_N);
+  const expected = [0,0,0,0,0,0,1,1,1,1,1,2,2,2,2,3,3,3,4,4,5];
+  expect(result).toEqual(expected);
+})
+
+describe('Mutation tests', () => {
+  test('mutate funciona', () => {
+    const mock_original = '00000000';
+    const mock_pos = 4;
+
+    const result = ga_tsp.mutate(mock_original, mock_pos);
+
+    expect(result).toBe('00001000');
+  });
+
+  test('mutate não quebra com última posição', () => {
+    const mock_original = '00000000';
+    const mock_pos = 7;
+
+    const result = ga_tsp.mutate(mock_original, mock_pos);
+
+    expect(result).toBe('00000001');
+  });
+
+  test('do_mutation decide não fazer mutação', () => {
+    jest.spyOn(Math, 'random');
+    Math.random.mockImplementationOnce(() => 0.7);
+    const mock_filhos = ['00000000', '00000001'];
+
+    const result = ga_tsp.do_mutation(mock_filhos, 0.5);
+
+    expect(result).toEqual(mock_filhos);
+  })
+
+  test('do_mutation faz mutaçoes', () => {
+    jest.spyOn(Math, 'random');
+    Math.random.mockImplementationOnce(() => 0.3);
+    Math.random.mockImplementationOnce(() => 0.5);
+    Math.random.mockImplementationOnce(() => 0.8);
+
+    const mock_filhos = ['0000000000', '0000000001'];
+    const expected =    ['0000010000', '0000000011'];
+
+    const result = ga_tsp.do_mutation(mock_filhos, 0.5);
+
+    expect(result).toEqual(expected);
+  })
+})

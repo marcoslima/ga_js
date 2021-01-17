@@ -13,7 +13,7 @@ Dadas N cidades qual o roteiro mais curto para o caixeiro visitar todas as cidad
 const config = {
 	min_coord: 0,
 	max_coord: 1000,
-	num_cities: 20
+	num_cities: 100
 };
 
 
